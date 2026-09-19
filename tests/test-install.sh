@@ -68,10 +68,16 @@ rmdir "$config_root/git/config"
 if command -v zsh >/dev/null; then
   run_install --install > /dev/null
   for source in "$repo/config/zsh/"* "$repo/config/zsh/.zprofile" "$repo/config/zsh/.zshrc"; do zsh -n "$source"; done
+  # Hosted runners can include writable completion directories in fpath.
+  # Startup must skip unsafe completions without asking a nonexistent terminal.
+  mkdir "$zsh_root/insecure-completions"
+  chmod 777 "$zsh_root/insecure-completions"
+  printf '#compdef dotfiles-unsafe\n' > "$zsh_root/insecure-completions/_dotfiles_unsafe"
+  printf 'fpath=("$ZDOTDIR/insecure-completions" $fpath)\n' > "$zsh_root/.zshenv"
   # Minimal PATH and a dummy prefix avoid depending on optional Homebrew tools.
   env HOME="$test_home" XDG_CONFIG_HOME="$config_root" XDG_STATE_HOME="$state_root" \
     ZDOTDIR="$zsh_root" HOMEBREW_PREFIX="$fixture/no-brew" PATH=/usr/bin:/bin TERM=dumb \
-    zsh -dlic '[[ $path[1] == "$HOME/.local/bin" ]] && bindkey "^[[A" && print -r -- SHELL_OK' > "$fixture/shell.txt" 2> "$fixture/shell.err"
+    zsh -dlic '[[ $path[1] == "$HOME/.local/bin" && ${_comps[dotfiles-unsafe]-} != _dotfiles_unsafe ]] && bindkey "^[[A" && print -r -- SHELL_OK' > "$fixture/shell.txt" 2> "$fixture/shell.err"
   [[ ! -s $fixture/shell.err ]] || { cat "$fixture/shell.err" >&2; exit 1; }
   [[ $(tail -n 1 "$fixture/shell.txt") = SHELL_OK ]]
 fi

@@ -8,7 +8,8 @@ setopt APPEND_HISTORY HIST_IGNORE_DUPS HIST_IGNORE_SPACE
 bindkey -e
 
 autoload -Uz compinit
-compinit
+# Skip completion paths with unsafe permissions without prompting for input.
+compinit -i
 
 _dotfiles_source_first() {
   local candidate
