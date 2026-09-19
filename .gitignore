@@ -1,0 +1,16 @@
+.DS_Store
+Thumbs.db
+*.local
+*.local.*
+.env
+.env.*
+*.pem
+*.key
+*.p12
+*.pfx
+*.sqlite*
+*.db*
+*history*
+!tests/*
+.backups/
+!*.example

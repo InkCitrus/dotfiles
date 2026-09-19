@@ -1,0 +1,5 @@
+# Copy to ~/.zshrc.local (or $ZDOTDIR/.zshrc.local); do not commit private values.
+# alias ls='eza'
+# alias cat='bat'
+# (( $+commands[zoxide] )) && eval "$(zoxide init zsh)"
+# export EDITOR=nvim

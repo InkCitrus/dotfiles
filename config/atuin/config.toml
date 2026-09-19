@@ -1,0 +1,22 @@
+# Upgrades are managed by your platform's package manager.
+update_check = false
+
+# Sync starts only after you explicitly log in or register on this machine.
+auto_sync = true
+sync_frequency = "10m"
+
+search_mode = "fuzzy"
+filter_mode = "global"
+filter_mode_shell_up_key_binding = "directory"
+workspaces = true
+
+style = "compact"
+inline_height = 20
+inline_height_shell_up_key_binding = 12
+show_preview = true
+enter_accept = false
+
+secrets_filter = true
+history_filter = [
+  "(?i)(password|passwd|token|secret|api[_-]?key|private[_-]?key)=",
+]

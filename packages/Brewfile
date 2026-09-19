@@ -1,0 +1,15 @@
+# Shell essentials only; macOS and Linux Homebrew share this list.
+brew "git"
+brew "zsh"
+brew "starship"
+brew "fzf"
+brew "atuin"
+brew "zsh-autosuggestions"
+brew "zsh-syntax-highlighting"
+
+# Useful CLI tools already present on the source machine.
+brew "ripgrep"
+brew "bat"
+brew "eza"
+brew "zoxide"
+brew "tmux"
